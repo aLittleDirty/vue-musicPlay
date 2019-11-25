@@ -2,7 +2,7 @@ import Mock from 'mockjs'; // 引入 mockjs
 
 // 随机生成新闻列表数据
 let newsList = Mock.mock({
-    'abc|20': [
+    'data|20': [
         {
             id: '@id',
             title: '@cparagraph(1, 3)',
@@ -15,4 +15,5 @@ let newsList = Mock.mock({
 
 export default [
     Mock.mock('/newslist', newsList), // 新闻列表数据接口
+    Mock.mock(RegExp(/\/newsDetail\?id=.*/), 'get', Mock.mock({'data': "asdafsasda"})), // 新闻列表数据接口
 ];
