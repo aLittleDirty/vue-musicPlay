@@ -7,7 +7,15 @@ export default {
     },
     data(){
       return{
-          currentPage:'/success'
-      }
-  }
+          currentPage:''
+        }
+    },
+    // 页面跳转后，公共导航栏信息发生改变
+    mounted(){
+      let _this = this;
+      this.$router.afterEach((to, from) => {
+        _this.currentPage = to.meta.title || '';
+      })
+    }
+
 }
