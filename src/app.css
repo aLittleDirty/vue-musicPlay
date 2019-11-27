@@ -1,0 +1,18 @@
+router-link::before{
+    content: '';
+    display:block;
+    border:1px solid rgba(0,0,0,1);
+    width:6px;
+    height:6px;
+}
+
+router-view{
+    margin:48px;
+}
+
+.musicBar{
+    position: absolute;
+    bottom: 0;
+    border:1px solid rgba(0,0,0,1);
+    background-color: rgba(144,144,144,1);
+}

@@ -1,21 +1,11 @@
 <template>
     <div id="app">
-        <!-- {{message}} -->
+        <router-link to="/home">主页</router-link><span>{{currentPage}}</span>
         <router-view></router-view>
-        <router-link to="/">首页</router-link>
-        <!-- <router-link to="'/details/'+item.id">list</router-link> -->
-        <router-link to="/list">列表页</router-link>
-        <router-link to="/details">细节</router-link>
-
+        <musicBar></musicBar>
     </div>
 </template>
-<script>
-export default {
-    name:'App',
-    data(){
-        return{
-            message:'Hello!'
-        }
-    }
-}
-</script>
+<style>
+    @import './app.css';
+</style>
+<script src="./app.js"></script>
