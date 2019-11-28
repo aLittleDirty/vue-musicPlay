@@ -1,3 +1,22 @@
-.musicList{
-    color:rgba(144,144,0,1);
+table{
+    margin:48px;
 }
+
+table{
+    border-collapse: collapse;
+    border-spacing:0;
+    text-align: left;
+    font-size: 12px;
+}
+
+table tr{
+    height: 48px;
+    border:1px solid rgba(200,200,200,1);
+    border-width: 1px 0;
+}
+
+table tr td{
+    color:rgba(100, 100, 100, 1);
+}
+
+/* 当前播放歌曲标红处理未完成 */

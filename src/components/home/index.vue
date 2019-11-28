@@ -6,7 +6,7 @@
 
         <div v-else>
             <li class="billboard" v-for="(billboard, index) in billboardList" :key="index">
-                <router-link to="/musicList">
+                <router-link :to="{path:'/musicList',query:{id:billboard.id}}">
                     <img :src='billboard.coverImgUrl'/>
                     <p>{{billboard.name}}</p> 
                 </router-link>
