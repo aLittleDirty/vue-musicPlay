@@ -4,7 +4,12 @@ export default{
     data(){
         return{
             musicLists:[],
-            loading:true
+            loading:true,
+        }
+    },
+    methods: {
+        changeMusic(newId){
+            this.$store.commit('changeMusicId',newId);
         }
     },
     created() {
@@ -27,7 +32,7 @@ export default{
             this.loading = false;
             // 100首歌曲的id
             // console.log(result.data.playlist.trackIds);
-            // 这个先放着吧
+            // 榜单的id
             let billBoardId = this.$route.query.id;
             console.log(billBoardId);
         }).catch((err)=>{
