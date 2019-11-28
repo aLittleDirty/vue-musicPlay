@@ -8,6 +8,6 @@ axios.defaults.baseURL="http://localhost:3000";
 // 创建Vue实例
 new Vue({
     router,
-    axios,
+    // axios,
     render:h => h(App)
 }).$mount('#app');

@@ -1,7 +1,18 @@
 <template>
     <div class="home"> 
-        {{home}}
-        <router-link to="/musicList">toList</router-link>
+        <div v-if='loading'>
+            <img class="loadingImg" src="../../assets/images/loading.png"/>
+        </div>
+
+        <div v-else>
+            <li class="billboard" v-for="(billboard, index) in billboardList" :key="index">
+                <router-link to="/musicList">
+                    <img :src='billboard.coverImgUrl'/>
+                    <p>{{billboard.name}}</p> 
+                </router-link>
+            </li>
+        </div> 
+        
     </div>
 </template>
 <script src="./index.js"></script>

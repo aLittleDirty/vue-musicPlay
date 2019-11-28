@@ -1,3 +1,36 @@
+.loadingImg{
+    width:50px;
+    height:50px;
+}
+
 .home{
-    color:rgba(144,0,0,1);
+    padding:48px 0 0 48px;
+}
+
+.billboard{
+    margin:0 48px 48px 0;
+    list-style: none;
+    display: inline-block;
+    border:1px solid rgba(200,200,200,1);
+}
+
+/* 定死了宽高，不能自适应屏幕大小 */
+.billboard img{
+    width:260px;
+    height: 125px;
+}
+
+.billboard p{
+    padding: 10px;
+    font-size: 14px;
+    color:rgba(0,0,0,1);
+}
+
+/* 去除router-link下划线 */
+a{
+    text-decoration: none;
+}
+
+.router-link-active{
+    text-decoration: none;
 }
