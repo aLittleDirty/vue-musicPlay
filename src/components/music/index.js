@@ -43,20 +43,6 @@ export default{
         })
         this.loading = false;
 
-        // 音乐播放
-        // axios.get('/song/url',{
-        //     params:{
-        //         id:this.$store.state.musicId
-        //     }
-        // }).then((result)=>{
-        //     if(result.data.code !== 200){
-        //         return;
-        //     }
-        //     let musicUrl = result.data.data[0].url;
-        //     console.log(musicUrl);
-        //     this.loading = false;
-        // }).catch((err)=>{
-        //   console.log(err);
-        // })
+       
     }
 }
