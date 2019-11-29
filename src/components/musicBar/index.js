@@ -5,7 +5,34 @@ export default{
         return{
             loading:true,
             musicDetail:{},
-            musicBar:'hello,I am musicBar'
+            musicUrl:'',
+            playing:this.$store.state.playing,
+            currentTime:'00:00',
+            duration:'00:00'
+        }
+    },
+    methods: {
+        getDuration(){
+            this.duration = this.$refs.audio.duration;
+        },
+        upDateTime(){
+            this.currentTime = this.$refs.audio.currentTime;
+        },
+        togglePlaying(){
+            this.playing = !this.playing;
+            this.$store.commit('changePlaying',this.playing);
+        },
+        prev(){
+            console.log('I want to change to last song');
+        },
+        next(){
+            console.log('I want to change to next song');
+        }
+    },
+    watch: {
+        playing(newValue){
+            let isPlay = newValue;
+            isPlay?this.$refs.audio.play():this.$refs.audio.pause();
         }
     },
     created() {
@@ -35,8 +62,8 @@ export default{
             if(result.data.code !== 200){
                 return;
             }
-            let musicUrl = result.data.data[0].url;
-            console.log(musicUrl);
+            this.musicUrl = result.data.data[0].url;
+            console.log(this.musicUrl);
             this.loading = false;
         }).catch((err)=>{
           console.log(err);

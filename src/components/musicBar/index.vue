@@ -8,11 +8,17 @@
                 <img :src="musicDetail.imgUrl"/>
             </router-link>
             <p class="songName">{{musicDetail.name}} - <span>{{musicDetail.singer}}</span></p>
-            <span class="timeCounting">00:00 / 03:12</span>
+            <audio 
+            ref="audio" 
+            :src="musicUrl" 
+            preload="auto"
+            @canplay="getDuration"
+            @timeupdate="upDateTime">您的浏览器不支持audio播放</audio>
+            <span class="timeCounting">{{currentTime}} / {{duration}}</span>
             <div class="controlBtns">
-                <button>上一首</button>
-                <button class="mode"></button>
-                <button>下一首</button>
+                <button @click="prev">上一首</button>
+                <button class="mode" @click="togglePlaying"></button>
+                <button @click="next">下一首</button>
                 <button class="volume"></button>
             </div>
         </div>
