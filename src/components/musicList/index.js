@@ -8,8 +8,10 @@ export default{
         }
     },
     methods: {
-        changeMusic(newId){
-            this.$store.commit('changeMusicId',newId);
+        changeMusic(newMusicId){
+            this.$store.commit('changeMusic',newMusicId);
+            console.log(newMusicId);
+            // 给musicBar传递参数，让歌曲开始自动播放
         }
     },
     created() {
