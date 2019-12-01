@@ -23,7 +23,7 @@ export default{
     watch: {
         // 更新新歌曲时，重新渲染
         getId(newId){
-            console.log('bbbb'+newId);
+            // console.log('bbbb'+newId);
             this.currentId = newId;
             this.getSongMessage(newId);
         },
@@ -60,7 +60,7 @@ export default{
             this.$store.commit('changeMusic',nextId);
         },
         getSongMessage(musicId){
-            axios.get('./song/detail',{
+            axios.get('/song/detail',{
                 params:{
                     ids:musicId
                 }
@@ -95,7 +95,7 @@ export default{
     },
     created() {
         // 获取歌曲的头像，歌名，歌手信息，歌曲mp3格式
-        console.log(this.currentId);
+        // console.log(this.currentId);
         this.getSongMessage(this.currentId);
     }       
 }

@@ -24,8 +24,8 @@ export default new Vuex.Store({
         changePlaying(state,isPlay){
             state.playing = isPlay;
         },
-        changeMusicLists(state,newMusicIdLists){
-            state.musicIdLists = newMusicIdLists;
+        changeIdLists(state,newIdLists){
+            state.musicIdLists = newIdLists;
         }
     }
 })
