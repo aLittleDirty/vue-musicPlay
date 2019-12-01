@@ -4,10 +4,18 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state:{
-        // 刚开始渲染时的音乐的起始值没想好怎么写...
-        // 可以考虑用localStorage
+        // 初始的歌曲id，自己写了一个
         musicId:347230,
         playing:false,
+        musicIdLists:[]
+    },
+    getters:{
+        getMusicId(state){
+            return state.musicId
+        },
+        getMusicIdLists(state){
+            return state.musicIdLists
+        }
     },
     mutations:{
         changeMusic(state,newMusicId){
@@ -15,6 +23,9 @@ export default new Vuex.Store({
         },
         changePlaying(state,isPlay){
             state.playing = isPlay;
+        },
+        changeMusicLists(state,newMusicIdLists){
+            state.musicIdLists = newMusicIdLists;
         }
     }
 })
