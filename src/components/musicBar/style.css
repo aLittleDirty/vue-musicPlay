@@ -36,11 +36,14 @@
     position:absolute;
     top:16px;
     /* 水平居中 */
+    width:300px;
+    margin:0 auto;
     left:0;
-    right: 0;
+    right: 0;  
     /* 为子元素设置水平垂直居中 */
     text-align: center;
     line-height: 48px;
+  
 }
 
 .controlBtns button{
