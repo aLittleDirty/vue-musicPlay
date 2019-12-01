@@ -46,16 +46,16 @@ export default{
             this.$store.commit('changePlaying',!this.playing);
         },
         prev(){
-            let idIndex = this.currentLists.findIndex((value)=>{value == this.currentId});
+            let idIndex = this.currentLists.findIndex((value)=>{return value == this.currentId});
             let prevIndex = (idIndex === 0)?0:idIndex-1;
             let prevId = this.currentLists[prevIndex];
-            this.$store.commit('changeMusic',prevId);
+            this.$store.commit('changeId',prevId);
         },
         next(){
-            let idIndex = this.currentLists.findIndex((value)=>{value == this.currentId});
+            let idIndex = this.currentLists.findIndex((value)=>{return value == this.currentId});
             let nextIndex = (idIndex === this.currentLists.length)?0:idIndex+1;
             let nextId = this.currentLists[nextIndex];
-            this.$store.commit('changeMusic',nextId);
+            this.$store.commit('changeId',nextId);
         },
         getSongMessage(musicId){
             axios.get('/song/detail',{
