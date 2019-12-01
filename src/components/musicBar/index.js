@@ -17,23 +17,22 @@ export default{
     computed: {
         ...mapGetters({
             getId:'getMusicId',
-            getLists:'getMusicIdLists'
+            getLists:'getMusicIdLists',
+            getPlay:'getPlaying'
         })
     },
     watch: {
         // 更新新歌曲时，重新渲染
         getId(newId){
-            // console.log('bbbb'+newId);
             this.currentId = newId;
             this.getSongMessage(newId);
         },
         getLists(newLists){
             this.currentLists = newLists;
         },
-        // 暂停与播放
-        playing(newValue){
-            let isPlay = newValue;
-            isPlay?this.$refs.audio.play():this.$refs.audio.pause();
+        getPlay(newValue){
+            this.playing = newValue;
+            this.playing?this.$refs.audio.play():this.$refs.audio.pause();
         }
     },
     methods: {
@@ -44,8 +43,7 @@ export default{
             this.currentTime = this.$refs.audio.currentTime;
         },
         togglePlaying(){
-            this.playing = !this.playing;
-            this.$store.commit('changePlaying',this.playing);
+            this.$store.commit('changePlaying',!this.playing);
         },
         prev(){
             let idIndex = this.currentLists.findIndex((value)=>{value == this.currentId});
@@ -95,7 +93,6 @@ export default{
     },
     created() {
         // 获取歌曲的头像，歌名，歌手信息，歌曲mp3格式
-        // console.log(this.currentId);
         this.getSongMessage(this.currentId);
     }       
 }

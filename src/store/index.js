@@ -15,6 +15,9 @@ export default new Vuex.Store({
         },
         getMusicIdLists(state){
             return state.musicIdLists
+        },
+        getPlaying(state){
+            return state.playing
         }
     },
     mutations:{
