@@ -8,10 +8,11 @@ export default{
         }
     },
     methods: {
-        changeMusic(newMusicId){
-            this.$store.commit('changeMusic',newMusicId);
-            // console.log(newMusicId);
-            // 给musicBar传递参数，让歌曲开始自动播放
+        changeMusic(newId){
+            this.$store.commit('changeId',newId);
+            // 开始播放歌曲
+            let isPlay = true;
+            this.$store.commit('changePlaying',isPlay);
         }
     },
     created() {
@@ -33,7 +34,8 @@ export default{
                     name:rawLists[j].name,
                     singer:rawLists[j].ar[0].name,
                     album:rawLists[j].al.name,
-                    time:rawLists[j].publishTime
+                    time:rawLists[j].publishTime,
+                    id:rawLists[j].id
                 })  
                 idLists.push(rawLists[j].id);
             }

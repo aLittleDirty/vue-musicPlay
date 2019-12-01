@@ -18,7 +18,7 @@ export default new Vuex.Store({
         }
     },
     mutations:{
-        changeMusic(state,newMusicId){
+        changeId(state,newMusicId){
             state.musicId = newMusicId;
         },
         changePlaying(state,isPlay){
