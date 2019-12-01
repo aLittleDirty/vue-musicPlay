@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { mapGetters } from 'vuex';
 export default{
     name:'music',
     data(){
@@ -8,13 +9,22 @@ export default{
             musicDetail:{},
         }
     },
-    created() {
-        let currentMusicId = this.$store.state.musicId;
-
+    computed: {
+        ...mapGetters({
+            getId:'getMusicId'
+        })
+    },
+    watch: {
+        getId(newId){
+            this.getSongMessage(newId);
+        }
+    },
+    methods: {
+        getSongMessage(songId){
         // 获取歌词
         axios.get('./lyric',{
             params:{
-                id:currentMusicId
+                id:songId
             }
         }).then((result)=>{
             if(result.data.code !==200){
@@ -28,7 +38,7 @@ export default{
         // 获取歌曲详情
         axios.get('./song/detail',{
             params:{
-                ids:currentMusicId
+                ids:songId
             }
         }).then((result)=>{
             let rawMusic = result.data.songs[0];
@@ -42,7 +52,10 @@ export default{
             console.log(err);
         })
         this.loading = false;
-
-       
+        }
+    },
+    created() {
+        let currentId = this.$store.state.musicId;
+        this.getSongMessage(currentId);
     }
 }
