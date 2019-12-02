@@ -8,7 +8,7 @@
                 <tr>
                     <th>音乐标题</th><th>歌手</th><th>专辑</th><th>时长</th>
                 </tr>
-                <tr v-for="(music, index) in musicLists" :key="index"  @dblclick="changeMusic(music.id)">
+                <tr v-for="(music, index) in musicLists" :key="index"  @dblclick="changeMusic(music.id),highlight($event)">
                     <td>{{music.name}}</td>
                     <td>{{music.singer}}</td>
                     <td>{{music.album}}</td>

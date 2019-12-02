@@ -13,6 +13,14 @@ export default{
             // 开始播放歌曲
             let isPlay = true;
             this.$store.commit('changePlaying',isPlay);
+        },
+        highlight(e){
+            let allTr = e.currentTarget.parentNode.children;
+            let currentTr = e.currentTarget;
+            for(let i =1;i < allTr.length;i++){
+                allTr[i].className = '';
+            }
+            currentTr.className = 'highlight';
         }
     },
     created() {
