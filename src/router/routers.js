@@ -17,13 +17,13 @@ export default new Router({
             path:'/musicList',
             name:'MusicList',
             component:MusicList,
-            meta:{title:'榜单详情'}
+            meta:{title:'/榜单详情'}
         },
         {
             path:'/music',
             name:'Music',
             component:Music,
-            meta:{title:'歌曲详情'}
+            meta:{title:'/歌曲详情'}
         },
         {
             path:'/',

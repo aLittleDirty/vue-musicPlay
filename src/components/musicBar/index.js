@@ -37,10 +37,10 @@ export default{
     },
     methods: {
         getDuration(){
-            this.duration = this.$refs.audio.duration;
+            this.duration = this.format(this.$refs.audio.duration);
         },
         upDateTime(){
-            this.currentTime = this.$refs.audio.currentTime;
+            this.currentTime = this.format(this.$refs.audio.currentTime);
         },
         togglePlaying(){
             this.$store.commit('changePlaying',!this.playing);
@@ -56,6 +56,19 @@ export default{
             let nextIndex = (idIndex === this.currentLists.length)?0:idIndex+1;
             let nextId = this.currentLists[nextIndex];
             this.$store.commit('changeId',nextId);
+        },
+        format(rawNumber){
+            let  rawSeconds = parseInt(rawNumber);
+            let second = this.addZero((rawSeconds%60));
+            let minute = this.addZero(parseInt(rawSeconds/60));
+            return `${minute}:${second}`;
+        },
+        addZero(value){
+            let stringValue = value.toString();
+            if(stringValue.length < 2){
+                stringValue = '0' + stringValue;
+            }
+            return stringValue;
         },
         getSongMessage(musicId){
             axios.get('/song/detail',{
