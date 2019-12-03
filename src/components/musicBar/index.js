@@ -25,6 +25,7 @@ export default{
             this.$refs.audio.pause();
             this.currentId = newId;
             this.getSongMessage(newId);
+            this.changeBtnStyle(newId);
             // 需要等待这个异步操作结束后才可播放
             this.$refs.audio.play();
         },
@@ -73,6 +74,36 @@ export default{
                 stringValue = '0' + stringValue;
             }
             return stringValue;
+        },
+        changeBtnStyle(newId){
+            let musicLists = this.currentMusicLists;
+            let currentId = null;
+            let index = 0;
+            if(musicLists.length === 0){
+                this.$refs.last.className = 'beGray';
+                this.$refs.next.className = 'beGray';
+            }
+            for(let i=0;i<musicLists.length;i++){
+                if(musicLists[i].id === newId){
+                    currentId =  newId;
+                    index = i;
+                }
+            }
+            if(!currentId){
+                this.$refs.last.className = 'beGray';
+                this.$refs.next.className = 'beGray';
+            }else{
+                if(index === 0){
+                    this.$refs.last.className = 'beGray';
+                    this.$refs.next.className = '';
+                }else if(index === musicLists.length){
+                    this.$refs.last.className = '';
+                    this.$refs.next.className = 'beGray';
+                }else{
+                    this.$refs.last.className = '';
+                    this.$refs.next.className = '';
+                }
+            }
         },
         getSongMessage(musicId){
             let musicLists = this.currentMusicLists;
@@ -134,5 +165,8 @@ export default{
     created() {
         // 初始化的歌曲需要通过axios.get取值
         this.getSongMessage(this.currentId);
-    }       
+    },
+    mounted() {
+        this.changeBtnStyle(this.currentId);        
+    },       
 }

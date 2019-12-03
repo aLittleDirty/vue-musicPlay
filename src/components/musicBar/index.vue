@@ -16,9 +16,9 @@
                 </p>
             </div>
             <div class="controlBtns">
-                <button @click="prev">上一首</button>
+                <button @click="prev" ref="last">上一首</button>
                 <button class="mode" @click="togglePlaying"></button>
-                <button @click="next">下一首</button>
+                <button @click="next" ref="next">下一首</button>
             </div>
             <div class="volume">
                 <button></button>
