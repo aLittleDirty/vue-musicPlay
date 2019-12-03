@@ -75,6 +75,9 @@ export default{
             }
             return stringValue;
         },
+        changeVolume(event){
+            this.$refs.audio.volume = event.currentTarget.value/10;
+        },
         changeBtnStyle(newId){
             let musicLists = this.currentMusicLists;
             let currentId = null;

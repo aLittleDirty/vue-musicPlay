@@ -22,7 +22,7 @@
             </div>
             <div class="volume">
                 <button></button>
-                <input type="range" max="10" min="0" value="5"/>
+                <input  type="range" max="10" min="0" value="5" @input="changeVolume"/>
             </div>
         </div>
     </div>
