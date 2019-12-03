@@ -73,6 +73,9 @@ export default{
             return stringValue;
         },
         getSongMessage(musicId){
+            // 暂停音乐，更换歌曲，播放音乐
+            this.$store.commit('changePlaying',false);
+
             let musicLists = this.currentMusicLists;
             if(musicLists.length !== 0){
                 for(let j in musicLists){
@@ -111,7 +114,7 @@ export default{
                     console.log(err);
                 })
         
-                // 获取歌曲播放信息
+                // 获取歌曲url
                 axios.get('/song/url',{
                     params:{
                         id:musicId
@@ -125,8 +128,8 @@ export default{
                   console.log(err);
                 })
             }
-
             this.loading = false;
+            this.$store.commit('changePlaying',true);
         }
     },
     created() {

@@ -9,11 +9,7 @@ export default{
     },
     methods: {
         changeMusic(newId){
-            console.log(newId);
             this.$store.commit('changeId',newId);
-            // 开始播放歌曲
-            let isPlay = true;
-            this.$store.commit('changePlaying',isPlay);
         },
         highlight(e){
             let allTr = e.currentTarget.parentNode.children;
