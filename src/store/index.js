@@ -7,14 +7,15 @@ export default new Vuex.Store({
         // 初始的歌曲id，自己写了一个
         musicId:347230,
         playing:false,
-        musicIdLists:[]
+        idLists:[],
+        musicLists:[]
     },
     getters:{
         getMusicId(state){
             return state.musicId
         },
-        getMusicIdLists(state){
-            return state.musicIdLists
+        getIdLists(state){
+            return state.idLists
         },
         getPlaying(state){
             return state.playing
@@ -28,7 +29,7 @@ export default new Vuex.Store({
             state.playing = isPlay;
         },
         changeIdLists(state,newIdLists){
-            state.musicIdLists = newIdLists;
+            state.idLists = newIdLists;
         }
     }
 })

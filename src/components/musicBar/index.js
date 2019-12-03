@@ -17,7 +17,7 @@ export default{
     computed: {
         ...mapGetters({
             getId:'getMusicId',
-            getLists:'getMusicIdLists',
+            getIdLists:'getIdLists',
             getPlay:'getPlaying'
         })
     },
@@ -27,8 +27,8 @@ export default{
             this.currentId = newId;
             this.getSongMessage(newId);
         },
-        getLists(newLists){
-            this.currentLists = newLists;
+        getIdLists(newIdLists){
+            this.currentLists = newIdLists;
         },
         getPlay(newValue){
             this.playing = newValue;

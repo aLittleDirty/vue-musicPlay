@@ -48,7 +48,7 @@ export default{
             singer:rawMusic.ar[0].name,
             img:rawMusic.al.picUrl
             };
-        }).then((err)=>{
+        }).catch((err)=>{
             console.log(err);
         })
         this.loading = false;
