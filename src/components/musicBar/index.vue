@@ -5,7 +5,7 @@
         </div>
         <div　v-else>
             <div class="songDetail">
-                <audio ref="audio" :src="musicDetail.url" preload="auto" @timeupdate="upDateTime">您的浏览器不支持audio播放</audio>
+                <audio ref="audio" :src="musicDetail.url" preload="auto" @timeupdate="upDateTime" @canplay="getDuration">您的浏览器不支持audio播放</audio>
                 <router-link class="imageContainer" to="/music">
                 <img :src="musicDetail.img"/>
                 </router-link>
