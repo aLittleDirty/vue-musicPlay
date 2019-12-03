@@ -21,9 +21,16 @@ export default{
                 allTr[i].className = '';
             }
             currentTr.className = 'highlight';
+        },
+        format(value){
+            let stringValue = value.toString();
+            while(stringValue.length < 2){
+                stringValue = '0' + stringValue;
+            }
+            return stringValue;
         }
     },
-    created() {
+    created(){
         // 通过榜单id
         let billBoardId = this.$route.query.id;
         axios.get('/playlist/detail',{
@@ -36,18 +43,49 @@ export default{
             }
             let idLists = [];
             let rawLists = result.data.playlist.tracks;
-
             for(let j in rawLists){
                 this.musicLists.push({
                     name:rawLists[j].name,
                     singer:rawLists[j].ar[0].name,
                     album:rawLists[j].al.name,
-                    time:rawLists[j].publishTime,
-                    id:rawLists[j].id
+                    id:rawLists[j].id,
+                    img:rawLists[j].al.picUrl,
+                    url:'',
+                    time:'loading...'
                 })  
                 idLists.push(rawLists[j].id);
             }
+            // 获取全部歌曲的url
+            let ids = idLists.join(',');
+            axios.get('/song/url',{
+                params:{
+                    id:ids
+                }
+            }).then((result)=>{
+                let rawUrls = result.data.data;
 
+                for(let j in rawUrls){
+                    // 将每一首歌的url放进歌曲对象中
+                    let url = rawUrls[j].url;
+                    this.musicLists[j].url = url;
+
+                    // 将每一首歌的总时长放进歌曲对象中
+                    if(typeof url !== 'string'){
+                        this.musicLists[j].time = "00:00";
+                        continue;
+                    }
+                    let audio = new Audio(url);
+                    audio.load();
+                    audio.oncanplay = ()=>{
+                        let rawTime = parseInt(audio.duration);
+                        let second = this.format(rawTime%60);
+                        let minute = this.format(parseInt(rawTime/60));
+                        this.musicLists[j].time = `${minute}:${second}`;
+                    }
+                }
+            }).catch((err)=>{
+                console.log(err);
+            })
             this.$store.commit('changeIdLists',idLists);
             this.loading = false;
 
