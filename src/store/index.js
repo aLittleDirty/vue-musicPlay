@@ -19,6 +19,9 @@ export default new Vuex.Store({
         },
         getPlaying(state){
             return state.playing
+        },
+        getMusicLists(state){
+            return state.musicLists
         }
     },
     mutations:{
@@ -30,6 +33,9 @@ export default new Vuex.Store({
         },
         changeIdLists(state,newIdLists){
             state.idLists = newIdLists;
+        },
+        changeMusicLists(state,newMusicLists){
+            state.musicLists = newMusicLists;
         }
     }
 })

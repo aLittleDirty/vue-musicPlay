@@ -5,14 +5,14 @@
         </div>
         <div　v-else>
             <div class="songDetail">
-                <audio ref="audio" :src="musicUrl" preload="auto" @canplay="getDuration" @timeupdate="upDateTime">您的浏览器不支持audio播放</audio>
+                <audio ref="audio" :src="musicDetail.url" preload="auto" @timeupdate="upDateTime">您的浏览器不支持audio播放</audio>
                 <router-link class="imageContainer" to="/music">
-                <img :src="musicDetail.imgUrl"/>
+                <img :src="musicDetail.img"/>
                 </router-link>
                 <p>
                 <span>{{musicDetail.name}}</span>
                 <span> - {{musicDetail.singer}}</span>
-                <span class="timeCounting">{{currentTime}} / {{duration}}</span>
+                <span class="timeCounting">{{musicDetail.currentTime}} / {{musicDetail.duration}}</span>
                 </p>
             </div>
             <div class="controlBtns">

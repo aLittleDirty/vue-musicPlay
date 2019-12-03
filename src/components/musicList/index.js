@@ -9,6 +9,7 @@ export default{
     },
     methods: {
         changeMusic(newId){
+            console.log(newId);
             this.$store.commit('changeId',newId);
             // 开始播放歌曲
             let isPlay = true;
@@ -87,6 +88,7 @@ export default{
                 console.log(err);
             })
             this.$store.commit('changeIdLists',idLists);
+            this.$store.commit('changeMusicLists',this.musicLists);
             this.loading = false;
 
         }).catch((err)=>{
