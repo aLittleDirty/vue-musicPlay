@@ -8,7 +8,7 @@ export default{
             musicDetail:{},
             currentId:this.$store.state.musicId,
             currentLists:this.$store.state.idLists,
-            playing:this.$store.state.playing,
+            playing:false,
             currentMusicLists:this.$store.state.musicLists
         }
     },
@@ -16,20 +16,22 @@ export default{
         ...mapGetters({
             getId:'getMusicId',
             getIdLists:'getIdLists',
-            getPlay:'getPlaying',
             getMusicLists:'getMusicLists'
         })
     },
     watch: {
         // 更新新歌曲时，重新渲染
         getId(newId){
+            this.$refs.audio.pause();
             this.currentId = newId;
             this.getSongMessage(newId);
+            // 需要等待这个异步操作结束后才可播放
+            this.$refs.audio.play();
         },
         getIdLists(newIdLists){
             this.currentLists = newIdLists;
         },
-        getPlay(newValue){
+        playing(newValue){
             this.playing = newValue;
             this.playing?this.$refs.audio.play():this.$refs.audio.pause();
         },
@@ -45,7 +47,7 @@ export default{
             this.musicDetail.currentTime = this.format(this.$refs.audio.currentTime);
         },
         togglePlaying(){
-            this.$store.commit('changePlaying',!this.playing);
+            this.playing = !this.playing;
         },
         prev(){
             let idIndex = this.currentLists.findIndex((value)=>{return value == this.currentId});
@@ -73,10 +75,8 @@ export default{
             return stringValue;
         },
         getSongMessage(musicId){
-            // 暂停音乐，更换歌曲，播放音乐
-            this.$store.commit('changePlaying',false);
-
             let musicLists = this.currentMusicLists;
+            // 当有歌曲列表，但歌曲列表中没有该id的情况没有考虑进去
             if(musicLists.length !== 0){
                 for(let j in musicLists){
                     if(musicLists[j].id === musicId){
@@ -129,7 +129,6 @@ export default{
                 })
             }
             this.loading = false;
-            this.$store.commit('changePlaying',true);
         }
     },
     created() {
