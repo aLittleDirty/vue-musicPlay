@@ -32,8 +32,10 @@ export default{
             // 高亮处理歌词
             this.currentLineNum = obj.lineNum;
             let lyricLines = this.$refs.scrollLists.getElementsByClassName('lyricLine');
-            let currentLine = lyricLines[obj.lineNum];
-            this.scroll.scrollToElement(currentLine,1000);
+            if(this.currentLineNum > 5){
+            let currentLine = lyricLines[this.currentLineNum-5];
+                this.scroll.scrollToElement(currentLine,1000);
+            }
         },
         getSongMessage(newId){
         let musicLists = this.$store.state.musicLists;
