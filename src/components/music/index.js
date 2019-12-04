@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { mapGetters } from 'vuex';
 import Lyric from 'lyric-parser'
+import Bscroll from 'better-scroll'
 export default{
     name:'music',
     data(){
@@ -8,7 +9,8 @@ export default{
             loading:true,
             lyric:{},
             musicDetail:{},
-            currentLineNum:0
+            currentLineNum:0,
+            scroll:null,
         }
     },
     computed: {
@@ -22,14 +24,16 @@ export default{
             this.getSongMessage(newId);
         },
         getPlaying(newPlaying){
-            let isPlaying = newPlaying;
-            isPlaying?this.lyric.play():this.lyric.pause();
+            this.lyric.togglePlay();
         }
     },
     methods: {
         handleLyric(obj){
             // 高亮处理歌词
             this.currentLineNum = obj.lineNum;
+            let lyricLines = this.$refs.scrollLists.getElementsByClassName('lyricLine');
+            let currentLine = lyricLines[obj.lineNum];
+            this.scroll.scrollToElement(currentLine,1000);
         },
         getSongMessage(newId){
         let musicLists = this.$store.state.musicLists;
@@ -88,5 +92,12 @@ export default{
     created() {
         let currentId = this.$store.state.musicId;
         this.getSongMessage(currentId);
-    }
+    },
+    mounted() {
+        this.$nextTick(()=>{
+            this.scroll = new Bscroll(this.$refs.scrollLists,{
+                scrollY:true
+            });
+        })
+    },
 }
