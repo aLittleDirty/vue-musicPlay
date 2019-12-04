@@ -1,25 +1,36 @@
 import axios from 'axios'
 import { mapGetters } from 'vuex';
+import Lyric from 'lyric-parser'
 export default{
     name:'music',
     data(){
         return{
             loading:true,
-            lyric:'',
+            lyric:{},
             musicDetail:{},
+            currentLineNum:0
         }
     },
     computed: {
         ...mapGetters({
-            getId:'getMusicId'
+            getId:'getMusicId',
+            getPlaying:'getPlaying'
         })
     },
     watch: {
         getId(newId){
             this.getSongMessage(newId);
+        },
+        getPlaying(newPlaying){
+            let isPlaying = newPlaying;
+            isPlaying?this.lyric.play():this.lyric.pause();
         }
     },
     methods: {
+        handleLyric(obj){
+            // 高亮处理歌词
+            this.currentLineNum = obj.lineNum;
+        },
         getSongMessage(newId){
         let musicLists = this.$store.state.musicLists;
         let songId = null;
@@ -65,7 +76,9 @@ export default{
             if(result.data.code !==200){
                 return;
             }
-            this.lyric = result.data.lrc.lyric.replace(/\[(.+?)\]/g,'');
+            let lyric = result.data.lrc.lyric;
+            this.lyric = new Lyric(lyric,this.handleLyric);
+
         }).catch((err)=>{
             console.log(err);
         }),  

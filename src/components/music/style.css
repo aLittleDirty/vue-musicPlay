@@ -9,26 +9,24 @@
     border-radius: 300px;
 }
 
-.lyric{
+.coverImage img{
+    width: 300px;
+    height: 300px;
+}
+
+.lyric-wrapper{
     display: inline-block;
     vertical-align: top;
-    /* 滚动条样式设置 */
-    width:50%;
+    width:60%;
+    height: 530px;
     margin-left: 50px;
-}
-.lyric h1{
-    font-size: 22px;
-    margin: 16px 0;
-}
-
-.lyric span{
-    margin-right:16px;
-}
-
-.lyric p{
-    white-space: pre;
-    line-height: 40px;
-    font-size: 14px;
-    height: 500px;
     overflow: scroll;
+}
+
+.lyric-content{
+    line-height: 40px;
+}
+
+.lyric-content p.highlight{
+    color: rgba(144,144,144,1)
 }

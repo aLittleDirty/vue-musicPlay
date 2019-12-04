@@ -8,7 +8,7 @@ export default{
             musicDetail:{},
             currentId:this.$store.state.musicId,
             currentLists:this.$store.state.idLists,
-            playing:false,
+            playing:this.$store.state.playing,
             currentMusicLists:this.$store.state.musicLists
         }
     },
@@ -16,23 +16,24 @@ export default{
         ...mapGetters({
             getId:'getMusicId',
             getIdLists:'getIdLists',
+            getPlaying:'getPlaying',
             getMusicLists:'getMusicLists'
         })
     },
     watch: {
         // 更新新歌曲时，重新渲染
         getId(newId){
-            this.$refs.audio.pause();
+            this.$store.commit('changePlaying',false);
             this.currentId = newId;
             this.getSongMessage(newId);
             this.changeBtnStyle(newId);
             // 需要等待这个异步操作结束后才可播放
-            this.$refs.audio.play();
+            this.$store.commit('changePlaying',true);
         },
         getIdLists(newIdLists){
             this.currentLists = newIdLists;
         },
-        playing(newValue){
+        getPlaying(newValue){
             this.playing = newValue;
             this.playing?this.$refs.audio.play():this.$refs.audio.pause();
         },
@@ -48,7 +49,7 @@ export default{
             this.musicDetail.currentTime = this.format(this.$refs.audio.currentTime);
         },
         togglePlaying(){
-            this.playing = !this.playing;
+            this.$store.commit('changePlaying',!this.playing);
         },
         prev(){
             let idIndex = this.currentLists.findIndex((value)=>{return value == this.currentId});
